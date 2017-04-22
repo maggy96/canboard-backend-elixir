@@ -5,6 +5,7 @@ defmodule Canboard.User do
   schema "users" do
     field :name, :string
     field :email, :string
+    has_many :boards, Canboard.Board
     coherence_schema
 
     timestamps

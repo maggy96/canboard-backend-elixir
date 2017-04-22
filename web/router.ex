@@ -25,6 +25,7 @@ defmodule Canboard.Router do
 
   scope "/api", Canboard do
     pipe_through :api
+    resources "/boards", BoardController
     # coherence_routes :protected
   end
 
