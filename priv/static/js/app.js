@@ -1,3 +1,5 @@
-// for phoenix_html support, including form and button helpers
-// copy the following scripts into your javascript bundle:
-// * https://raw.githubusercontent.com/phoenixframework/phoenix_html/v2.3.0/priv/static/phoenix_html.js
+var CLOSURE_UNCOMPILED_DEFINES = null;
+if(typeof goog == "undefined") document.write('<script src="/js/out/goog/base.js"></script>');
+document.write('<script src="/js/out/cljs_deps.js"></script>');
+document.write('<script>if (typeof goog == "undefined") console.warn("ClojureScript could not load :main, did you forget to specify :asset-path?");</script>');
+document.write('<script>goog.require("canboard_frontend.dev");</script>');

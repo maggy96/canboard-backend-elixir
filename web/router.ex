@@ -2,35 +2,30 @@ defmodule Canboard.Router do
   use Canboard.Web, :router
   use Coherence.Router
 
-  pipeline :browser do
-    plug :accepts, ["html"]
+  pipeline :frontend do
+
+    scope "/", Canboard do
+      coherence_routes :all
+      get "/*path", PageController, :index
+    end
+
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_flash
-    plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Coherence.Authentication.Session
+    plug Coherence.Authentication.Session, protected: false
   end
 
   pipeline :api do
+
+    scope "/api", Canboard do
+      resources "/boards", BoardController, only: [:index, :show, :create, :update, :delete]
+    end
+
     plug :accepts, ["json"]
-    # plug Coherence.Authentication.Session, protected: true
+    plug :fetch_session
+    plug :put_secure_browser_headers
+    plug Coherence.Authentication.Session, cookie_expire: 10*60*60, login: &Canboard.PageController.index/1
   end
 
-  scope "/", Canboard do
-    pipe_through :browser # Use the default browser stack
-
-    get "/", PageController, :index
-    coherence_routes()
-  end
-
-  scope "/api", Canboard do
-    pipe_through :api
-    resources "/boards", BoardController
-    # coherence_routes :protected
-  end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", Canboard do
-  #   pipe_through :api
-  # end
 end

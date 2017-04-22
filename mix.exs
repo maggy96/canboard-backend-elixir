@@ -21,8 +21,7 @@ defmodule Canboard.Mixfile do
      applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex,
                     # User authentication
-                    :coherence
-                   ]]
+                    :coherence]]
   end
 
   # Specifies which paths to compile per environment.
@@ -42,7 +41,11 @@ defmodule Canboard.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      # User authentication
-     {:coherence, "~> 0.3"}]
+     {:coherence, "~> 0.3"},
+     # File system interaction for watching frontend
+     # System Requirements listed on project page (github.com/synrc/fs)
+     {:eye_drops, "~> 1.3"}
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -56,4 +59,5 @@ defmodule Canboard.Mixfile do
      "ecto.reset": ["ecto.drop", "ecto.setup"],
      "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
+
 end

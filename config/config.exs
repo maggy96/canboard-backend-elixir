@@ -30,15 +30,23 @@ config :phoenix, :generators,
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
 
+
+api_actions = [:create, :show, :update, :delete]
 # %% Coherence Configuration %%   Don't remove this line
 config :coherence,
   user_schema: Canboard.User,
   repo: Canboard.Repo,
   module: Canboard,
   logged_out_url: "/",
-  email_from_name: "Your Name",
-  email_from_email: "yourname@example.com",
-  opts: [:authenticatable, :recoverable, :lockable, :trackable, :unlockable_with_token, :confirmable, :registerable]
+  email_from_name: "Canboard",
+  email_from_email: "users@canboard.com",
+  opts: [authenticatable: api_actions,
+         recoverable: api_actions,
+         trackable: api_actions,
+         unlockable_with_token: api_actions,
+         lockable: api_actions,
+         confirmable: api_actions,
+         registerable: api_actions,]
 
 config :coherence, Canboard.Coherence.Mailer,
   adapter: Swoosh.Adapters.Sendgrid,

@@ -18,7 +18,7 @@ config :canboard, Canboard.Endpoint,
 config :canboard, Canboard.Endpoint,
   live_reload: [
     patterns: [
-      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
+      # ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{web/views/.*(ex)$},
       ~r{web/templates/.*(eex)$}
@@ -35,8 +35,21 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :canboard, Canboard.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "canboard_dev",
+  username: "canboard",
+  password: "canboard",
+  database: "canboard",
   hostname: "localhost",
   pool_size: 10
+
+# Watches files from the frontend and copies them to the backend path
+config :eye_drops,
+  tasks: [
+    %{
+      id: :frontend_js,
+      name: "Frontend Assets",
+      run_on_start: true,
+      cmd: "cp -r canboard-frontend/resources/public/* priv/static/ && cp -r canboard-frontend/target/cljsbuild/public/* priv/static/",
+      paths: ["canboard-frontend/resources/public",
+              "canboard-frontend/target/cljsbuild/public"]
+    }
+  ]

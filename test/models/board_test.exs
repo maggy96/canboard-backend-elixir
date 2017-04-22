@@ -3,7 +3,7 @@ defmodule Canboard.BoardTest do
 
   alias Canboard.Board
 
-  @valid_attrs %{description: "some content", title: "some content"}
+  @valid_attrs %{description: "Sample board description", title: "Sample title"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

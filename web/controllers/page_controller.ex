@@ -1,7 +1,13 @@
 defmodule Canboard.PageController do
   use Canboard.Web, :controller
 
+  def index(conn) do
+    index(conn, %{})
+  end
+
   def index(conn, _params) do
-    render conn, "index.html"
+    conn
+    |> put_layout(false)
+    |> render "index.html"
   end
 end

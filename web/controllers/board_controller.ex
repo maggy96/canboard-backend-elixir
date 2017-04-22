@@ -8,7 +8,7 @@ defmodule Canboard.BoardController do
     render(conn, "index.json", boards: boards)
   end
 
-  def create(conn, %{"board" => board_params}) do
+  def create(conn, board_params) do
     changeset = Board.changeset(%Board{}, board_params)
 
     case Repo.insert(changeset) do

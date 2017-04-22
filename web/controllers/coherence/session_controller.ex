@@ -83,19 +83,20 @@ defmodule Canboard.Coherence.SessionController do
           |> track_login(user, user_schema.trackable?)
           |> save_rememberable(user, remember)
           |> put_flash(:notice, "Signed in successfully.")
-          |> redirect_to(:session_create, params)
+          |> assign(:logged_in, true)
+          |> render("new.json", params)
         else
           conn
           |> put_flash(:error, "Too many failed login attempts. Account has been locked.")
           |> assign(:locked, true)
           |> put_status(423)
-          |> render("new.html", [{login_field, ""}, remember: rememberable_enabled?])
+          |> render("locked.json", [{login_field, ""}, remember: rememberable_enabled?])
         end
       else
         conn
         |> put_flash(:error, "You must confirm your account before you can login.")
         |> put_status(406)
-        |> render("new.html", [{login_field, login}, remember: rememberable_enabled?])
+        |> render("confirm.json", [{login_field, login}, remember: rememberable_enabled?])
       end
     else
       conn
@@ -114,7 +115,7 @@ defmodule Canboard.Coherence.SessionController do
   """
   def delete(conn, params) do
     delete(conn)
-    |> redirect_to(:session_delete, params)
+    |> render("delete.json", params)
   end
 
   @doc """
