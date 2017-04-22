@@ -1,7 +1,8 @@
 defmodule Canboard.Repo.Migrations.CreateCoherenceUser do
   use Ecto.Migration
   def change do
-    create table(:users) do
+    create table(:users, primary_key: false) do
+      add :id, :binary_id, primary_key: true
       add :name, :string
       add :email, :string
       # authenticatable
@@ -24,7 +25,7 @@ defmodule Canboard.Repo.Migrations.CreateCoherenceUser do
       add :confirmation_token, :string
       add :confirmed_at, :datetime
       add :confirmation_sent_at, :datetime
-      
+
       timestamps()
     end
     create unique_index(:users, [:email])

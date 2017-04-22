@@ -42,8 +42,7 @@ defmodule Canboard.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      # User authentication
-     {:coherence, "~> 0.3"}
-    ]
+     {:coherence, "~> 0.3"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
