@@ -35,8 +35,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :canboard, Canboard.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "canboard",
-  password: "canboard",
+  username: "postgres",
+  password: "postgres",
   database: "canboard",
   hostname: "localhost",
   pool_size: 10
