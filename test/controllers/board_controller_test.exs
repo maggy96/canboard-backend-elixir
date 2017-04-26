@@ -11,13 +11,13 @@ defmodule Canboard.BoardControllerTest do
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, board_path(conn, :index)
-    assert json_response(conn, 200)["data"] == []
+    assert json_response(conn, 200) == %{ "boards" => [] }
   end
 
   test "shows chosen resource", %{conn: conn} do
     board = Repo.insert! %Board{}
     conn = get conn, board_path(conn, :show, board)
-    assert json_response(conn, 200)["data"] == %{"id" => board.id,
+    assert json_response(conn, 200)["board"] == %{"id" => board.id,
       "title" => board.title,
       "description" => board.description}
   end
@@ -29,8 +29,8 @@ defmodule Canboard.BoardControllerTest do
   end
 
   test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, board_path(conn, :create), board: @valid_attrs
-    assert json_response(conn, 201)["data"]["id"]
+    conn = post conn, board_path(conn, :create), @valid_attrs
+    assert json_response(conn, 201)["board"]["id"]
     assert Repo.get_by(Board, @valid_attrs)
   end
 
@@ -42,7 +42,7 @@ defmodule Canboard.BoardControllerTest do
   test "updates and renders chosen resource when data is valid", %{conn: conn} do
     board = Repo.insert! %Board{}
     conn = put conn, board_path(conn, :update, board), board: @valid_attrs
-    assert json_response(conn, 200)["data"]["id"]
+    assert json_response(conn, 200)["board"]["id"]
     assert Repo.get_by(Board, @valid_attrs)
   end
 
