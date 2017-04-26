@@ -44,7 +44,9 @@ defmodule Canboard.Mixfile do
      {:coherence, "~> 0.3"},
      # File system interaction for watching frontend
      # System Requirements listed on project page (github.com/synrc/fs)
-     {:eye_drops, "~> 1.3"}
+     {:eye_drops, "~> 1.3"},
+     # static code analysis
+     {:credo, "~> 0.7", only: [:dev, :test]}
     ]
   end
 
